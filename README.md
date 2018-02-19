@@ -57,7 +57,7 @@ docker run -it --rm \
 - `AWS_ACCESS_KEY_ID`: The access_key_id you get to your account on AWS IAM. [1]
 - `AWS_SECRET_ACCESS_KEY`: The secret_access_key you get to your account on AWS IAM. [1]
 - `AWS_DEFAULT_REGION`: The region of the S3 bucket
-- `AWS_S3_BUCKET`: The name of the S3 bucket
+- `AWS_S3_BUCKET`: The name of the S3 bucket (the bucket must exist)
 
 [1] It is a good practice to **not** commit this key/secret in plain text to your code repository. Preferably you should put this value as a Environment Variable on your host machine (or on the CI/CD service).
 

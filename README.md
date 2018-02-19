@@ -26,6 +26,32 @@ services:
       - './path/to/your/compiled/project:/project/dist'
 ```
 
+##### Deploying
+
+In case you're usig Host Environment Variables inside your `docker-compose.yml` (like the example above), ensure that you have exported the key/secret/region variable:
+
+```bash
+export AWS_ACCESS_KEY_ID="<id>"
+export AWS_SECRET_ACCESS_KEY="<key>"
+export AWS_DEFAULT_REGION="<region>"
+```
+
+Then just type `docker-compose run deploy` and the Bucket content will be replaced.
+
+#### (pure) Docker command line
+
+```bash
+docker run -it --rm \
+    -e "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}" \
+    -e "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}" \
+    -e "AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}" \
+    -e "AWS_S3_BUCKET=bucket_to_replace_content" \
+    -v "/path/to/your/compiled/project:/project/dist" \
+    carlosaschjr/deploy-to-s3
+```
+
+### Details
+
 ##### Environments
 
 - `AWS_ACCESS_KEY_ID`: The access_key_id you get to your account on AWS IAM. [1]
@@ -38,15 +64,3 @@ services:
 ##### Volumes
 
 You should map the folder of your compiled project (e.g. `dist` for default `angular-cli` projects) to `/project/dist`.
-
-##### Deploying
-
-In case you're usig Host Environment Variables inside your `docker-compose.yml` (like the example abobe), ensure that you have exported the key/secret/region variable:
-
-```bash
-export AWS_ACCESS_KEY_ID="<id>"
-export AWS_SECRET_ACCESS_KEY="<key>"
-export AWS_DEFAULT_REGION="<region>"
-```
-
-Then just type `docker-compose run deploy` and the Bucket content will be replaced.

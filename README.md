@@ -2,6 +2,9 @@
 
 This image contains a script to replace all the content of a certain AWS S3 Bucket with a folder you specify.
 
+# WARNING !!!
+This image will remove all content inside the bucket you set on the environment variable `AWS_S3_BUCKET`. Be careful, you may be unable to recover the deleted files if you set the wrong bucket.
+
 ### Motivation
 
 To facilitate the script to deploy some Single Page Application built on CI/CD services to AWS S3

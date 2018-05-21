@@ -9,5 +9,8 @@ if [[ '0' == $(aws s3 ls | grep "${AWS_S3_BUCKET}" | wc -l) ]]; then
     exit 1
 fi
 
-aws s3 rm s3://$AWS_S3_BUCKET/ --recursive
-aws s3 cp dist s3://$AWS_S3_BUCKET/ --recursive
+DISTPATH=$([[ $PATH_TO_REPLACE ]] && echo /$PATH_TO_REPLACE || echo '')
+_RECURSIVE=$([[ ${RECURSIVE:-TRUE} == "TRUE" ]] && echo '--recursive' || echo '')
+
+aws s3 rm s3://$AWS_S3_BUCKET/$PATH_TO_REPLACE $_RECURSIVE
+aws s3 cp dist$DISTPATH s3://$AWS_S3_BUCKET/$PATH_TO_REPLACE $_RECURSIVE $(printenv EXTRA_FLAGS)
